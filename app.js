@@ -12,10 +12,26 @@ const getWeatherDetails = require('./utils/getWeatherDetails')
 
 
 
-getWeatherDetails('14.4386, 79.9759', (error, response) => {
-    console.log(error)
-    console.log(response)
+geocode('suneel pyramids', (error, data) => {
+     if(error){
+        return console.log(error)
+     }
+    
+    getWeatherDetails(data.latitude + ',' + data.longitude, (error, forecastData) => {
+        if(error){
+            return console.log(error)
+         }
+        console.log(data)
+        console.log(forecastData)
+    
+    })
 })
+
+// getWeatherDetails('14.4386, 79.9759', (error, response) => {
+//     console.log(error)
+//     console.log(response)
+
+// })
   
 // getWeatherDetails('Vijayawa', (error, response) => {
 //     console.log(error)
