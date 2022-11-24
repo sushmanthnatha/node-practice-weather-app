@@ -10,22 +10,28 @@ const getWeatherDetails = require('./utils/getWeatherDetails')
 // const url = 'http://api.weatherstack.com/current?access_key='+ weather_stack_access_key +'&query=14.433,79.967&units=m'
 // const url2 = 'http://api.positionstack.com/v1/forward?access_key='+ position_stack_access_key +'&query=1600 Pennsylvania Ave NW, Washington DC&limit=1'
 
+const address = process.argv[2]
 
-
-geocode('suneel pyramids', (error, data) => {
-     if(error){
-        return console.log(error)
-     }
-    
-    getWeatherDetails(data.latitude + ',' + data.longitude, (error, forecastData) => {
+if(!address){
+    console.log('Please provide an address')
+} else {
+    geocode(address, (error, data) => {
         if(error){
-            return console.log(error)
-         }
-        console.log(data)
-        console.log(forecastData)
-    
-    })
-})
+           return console.log(error)
+        }
+       
+       getWeatherDetails(data.latitude + ',' + data.longitude, (error, forecastData) => {
+           if(error){
+               return console.log(error)
+            }
+           console.log(data)
+           console.log(forecastData)
+       
+       })
+   })
+}
+
+
 
 // getWeatherDetails('14.4386, 79.9759', (error, response) => {
 //     console.log(error)
@@ -44,4 +50,3 @@ geocode('suneel pyramids', (error, data) => {
 //     console.log(response)
 // })
 
-  
